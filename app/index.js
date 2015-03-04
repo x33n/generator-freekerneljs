@@ -181,6 +181,7 @@ module.exports = yeoman.generators.Base.extend({
         this.template(templateName + '/app/_index.html', 'app/index.html');
         this.bulkDirectory(templateName + '/app/assets/images', 'app/assets/images');
         this.bulkDirectory(templateName + '/app/assets/scss', 'app/assets/scss');
+        this.bulkDirectory(templateName + '/app/assets/css', 'app/assets/css');
         this.bulkDirectory(templateName + '/app/views', 'app/views');
         this.bulkDirectory(templateName + '/app/widgets', 'app/widgets');
     },
