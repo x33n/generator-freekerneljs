@@ -64,7 +64,6 @@ module.exports = function (grunt) {
                 src: [
                     '**/*',
                     '!**/assets/css/**',
-                    '!**/assets/libs/**',
                     '!**/assets/scss/**'
                 ],
                 expand: true,
@@ -118,14 +117,14 @@ module.exports = function (grunt) {
                     'app/assets/css/**/*.css',
                     '!**/app/assets/css/**/custom.css',
                 ],
-                dest: 'build/debug/assets/css/app.css',
+                dest: 'dist/debug/assets/css/app.css',
             },
             'debug-css-last': {
                 src: [
-                    'build/debug/assets/css/app.css',
+                    'dist/debug/assets/css/app.css',
                     'app/assets/css/custom.css'
                 ],
-                dest: 'build/debug/assets/css/app.css',
+                dest: 'dist/debug/assets/css/app.css',
             }
         },
         clean: {
@@ -166,10 +165,10 @@ module.exports = function (grunt) {
         'wiredep:debug',
         'sass:debug',
         'string-replace:material-design-iconic-font',
-        //'string-replace:tags',
+        'string-replace:tags',
         'sass:material-design-iconic-font',
-        //'concat:debug-css-first',
-        //'concat:debug-css-last',
+        'concat:debug-css-first',
+        'concat:debug-css-last',
         'clean:debug-after'
     ]);
 
