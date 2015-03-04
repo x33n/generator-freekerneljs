@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html ng-controller="MainViewController">
-
     <head>
         <title ng-bind="appTitle"></title>
         <meta charset="utf-8">
@@ -9,30 +8,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" type="image/ico" href="assets/images/favicon.ico">
 		
+        <!-- dist:css dist/assets/css/app.min.css -->
 		<!-- bower:css -->
 		<!-- endbower -->
         <link rel="stylesheet" type="text/css" href="assets/css/app.css" media="screen">
+        <!-- /dist -->
 		
+        <!-- dist:js dist/app.min.js -->
 		<!-- bower:js -->
 		<!-- endbower -->
+        <!-- /dist -->
         <script src="app.bootstrap.js"></script>
     </head>
     
-    <body layout="column">
-        
-        <notifications-dialog></notifications-dialog>
-        
-        <md-toolbar layout="row">
-            <h1>{{appTitle}}</h1>
-            <md-button class="mdi mdi-view-headline" aria-label="Toggle" ng-click="toggleSidenav('left')"></md-button>
-        </md-toolbar>
-    
-        <div layout="row" flex>
-            <navigation-bar></navigation-bar>
-            
-            <!-- page content -->
-            <div layout="column" flex ng-view></div>
-        </div>
+    <body>
 
     </body>
 </html>
