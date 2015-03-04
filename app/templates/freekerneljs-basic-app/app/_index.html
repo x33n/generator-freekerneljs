@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-controller="MainViewController">
+
+    <head>
+        <title ng-bind="appTitle"></title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="fkjs_(description)">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" type="image/ico" href="assets/images/favicon.ico">
+		
+		<!-- bower:css -->
+		<!-- endbower -->
+        <link rel="stylesheet" href="assets/bower_components/angular-material/angular-material.min.css">
+        <link rel="stylesheet" href="assets/bower_components/material-design-iconic-font/css/material-design-iconic-font.css">
+        <link rel="stylesheet" type="text/css" href="dist/app.min.css" media="screen">
+		
+		<!-- bower:js -->
+		<!-- endbower -->
+        <script src="assets/bower_components/angular/angular.js"></script>
+        <script src="assets/bower_components/angular-route/angular-route.js"></script>
+        <script src="assets/bower_components/angular-aria/angular-aria.js"></script>
+        <script src="assets/bower_components/angular-animate/angular-animate.js"></script>
+        <script src="assets/bower_components/angular-material/angular-material.js"></script>
+        <script src="assets/bower_components/scriptjs/dist/script.min.js"></script>
+        <script src="app.bootstrap.js"></script>
+    </head>
+    
+    <body layout="column">
+        
+        <notifications-dialog></notifications-dialog>
+        
+        <md-toolbar layout="row">
+            <h1>{{appTitle}}</h1>
+            <md-button class="mdi mdi-view-headline" aria-label="Toggle" ng-click="toggleSidenav('left')"></md-button>
+        </md-toolbar>
+    
+        <div layout="row" flex>
+            <navigation-bar></navigation-bar>
+            
+            <!-- page content -->
+            <div layout="column" flex ng-view></div>
+        </div>
+
+    </body>
+</html>
