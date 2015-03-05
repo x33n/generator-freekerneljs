@@ -36,6 +36,15 @@ module.exports = function (grunt) {
                         '!**/assets/images/**'
                     ],
                     dest: 'dist/debug/'
+                }, {
+                    expand: true,
+                    cwd: 'dist/',
+                    src: [
+                        '**/*',
+                        '!**/assets/fonts/**',
+                        '!**/assets/images/**'
+                    ],
+                    dest: 'dist/'
                 }],
                 options: {
                     replacements: [
@@ -108,6 +117,20 @@ module.exports = function (grunt) {
                     dest: 'app/assets/scss/temp',
                     ext: '.css'
                 }]
+            },
+            dist: {
+                options: {
+                    style: 'expanded',
+                    lineNumbers: true,
+                    cacheLocation: 'app/assets/scss/.sass-cache'
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'app/assets/scss/',
+                    src: ['**/*.scss'],
+                    dest: 'app/assets/scss/temp',
+                    ext: '.css'
+                }]
             }
         },
         concat: {
@@ -125,6 +148,21 @@ module.exports = function (grunt) {
                     'app/assets/css/custom.css'
                 ],
                 dest: 'dist/debug/assets/css/app.css',
+            },
+            'dist-css-first': {
+                src: [
+                    'app/assets/scss/temp/*.css',
+                    'app/assets/css/**/*.css',
+                    '!**/app/assets/css/**/custom.css',
+                ],
+                dest: 'dist/assets/css/app.css',
+            },
+            'dist-css-last': {
+                src: [
+                    'dist/assets/css/app.css',
+                    'app/assets/css/custom.css'
+                ],
+                dest: 'dist/assets/css/app.css',
             }
         },
         clean: {
@@ -132,6 +170,12 @@ module.exports = function (grunt) {
                 'dist/debug/'
             ],
             'debug-after': [
+                'app/assets/scss/temp'
+            ],
+            'dist-before': [
+                'dist/'
+            ],
+            'disst-after': [
                 'app/assets/scss/temp'
             ]
         },
@@ -164,11 +208,27 @@ module.exports = function (grunt) {
         'copy:debug',
         'wiredep:debug',
         'sass:debug',
-        'string-replace:material-design-iconic-font',
         'string-replace:tags',
-        'sass:material-design-iconic-font',
         'concat:debug-css-first',
         'concat:debug-css-last',
+        'clean:debug-after'
+    ]);
+
+    /**
+	 * @description
+	 *   Dist task(s).
+	 * 
+	 */
+    grunt.registerTask('dist', [
+        'clean:dist-before',
+        //'copy:debug',
+        //'wiredep:debug',
+        'sass:dist',
+        //'string-replace:material-design-iconic-font',
+        'string-replace:tags',
+        //'sass:material-design-iconic-font',
+        'concat:dist-css-first',
+        'concat:dist-css-last',
         'clean:debug-after'
     ]);
 
@@ -178,6 +238,8 @@ module.exports = function (grunt) {
 	 * 
 	 */
     grunt.registerTask('default', [
-
+        'string-replace:material-design-iconic-font',
+        'sass:material-design-iconic-font',
+        'debug'
     ]);
 };

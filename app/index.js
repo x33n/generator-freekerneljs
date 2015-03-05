@@ -1,5 +1,6 @@
 'use strict';
-var fs = require('fs'),
+var util = require('util'),
+    fs = require('fs'),
     path = require('path'),
     chalk = require('chalk'),
     compareVersion = require('compare-version'),
@@ -15,14 +16,29 @@ function getDirectories(srcpath) {
     });
 }
 
-module.exports = yeoman.generators.Base.extend({
-    initializing: function () {
+var freekerneljsGenerator = yeoman.generators.Base.extend({
+    constructor: function () {
+        yeoman.generators.Base.apply(this, arguments);
+
+        this.on('end', function () {
+            console.log('Running the Grunt \'default\' task now ...');
+
+            this.spawnCommand('grunt', ['default']).on('close', function () {
+                console.log('The Grunt task has completed.');
+            })
+        });
+
+        this.appname = this.appname || path.basename(process.cwd());
+        this.appname = this.appname.replace(/\s+/g, '-');
+    },
+
+    initializing: function() {
         this.pkg = require('../package.json');
         this.compareVersion = compareVersion;
         generatorRoot = this.templatePath('../../');
         templatePath = this.templatePath();
     },
-    
+
     prompting: function () {
         var done = this.async();
 
@@ -159,7 +175,7 @@ module.exports = yeoman.generators.Base.extend({
             this.materialModule = hasMod('materialModule');
             this.scriptjsModule = hasMod('scriptjsModule');
             this.iconicFont = hasMod('iconicFont');
-            
+
             done();
         }.bind(this));
     },
@@ -194,10 +210,12 @@ module.exports = yeoman.generators.Base.extend({
     writing: function () {
         this.copy(templateName + '/readme.md', 'README.md');
     },
-
+    
     install: function () {
         this.installDependencies({
             skipInstall: this.options['skip-install']
         });
     }
 });
+
+module.exports = freekerneljsGenerator;
