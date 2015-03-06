@@ -3,13 +3,13 @@
   "version": "<%= props.version %>",
   "description": "<%= props.description %>",
   "license": "<%= props.license %>",
-  "repository": "<%= props.github_username %>/<%= slugname %>",
+  "repository": "https://github.com/<%= props.github_username %>/<%= slugname %>",
   "author": {
     "name": "<%= props.author_name %>",
     "email": "<%= props.author_email %>",
-    "url": "https://github.com/<%= props.github_username %>"
+    "url": ""
   },
-  "homepage": "https://github.com/<%= props.github_username %>/<%= slugname %>",
+  "homepage": "",
   "keywords": [],
   "devDependencies": {
     "grunt": "~0.4.5",
@@ -18,6 +18,7 @@
     "grunt-contrib-copy": "^0.7.0",
     "grunt-contrib-sass": "^0.9.2",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-css": "^0.5.4",
     "grunt-contrib-uglify": "~0.2.7",
     "grunt-contrib-jshint": "~0.7.2",
     "grunt-contrib-qunit": "~0.3.0",

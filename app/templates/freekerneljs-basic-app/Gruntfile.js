@@ -11,11 +11,11 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-        banner: '/*! <%%= pkg.name %> - v<%%= pkg.version %> - ' +
-          '<%%= grunt.template.today("yyyy-mm-dd") %>\n' +
-          '<%%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-          '* Copyright (c) <%%= grunt.template.today("yyyy") %> <%%= pkg.author.name %>;' +
-          ' Licensed <%= props.license %> */\n',
+        banner: '/*!\n' + 
+            ' * <%= pkg.name %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+            ' * <%= pkg.homepage %>\n' +
+            ' * @license <%= pkg.license %>\n' +
+            ' * v<%= pkg.version %>\n */\n',
 
         'string-replace': {
             'material-design-iconic-font': {
@@ -172,9 +172,9 @@ module.exports = function (grunt) {
                 src: [
                     './bower_components/{,*/}*.js',
                     './bower_components/{,*/,*/dist/}*.js',
+                    './app/assets/js/**/*.js',
                     '!./bower_components/{,*/}*min.js',
-                    '!./bower_components/{,*/,*/dist/}*min.js',
-                    './app/assets/js/**/*.js'
+                    '!./bower_components/{,*/,*/dist/}*min.js'
                 ],
                 dest: 'dist/app.js',
             },
@@ -203,16 +203,28 @@ module.exports = function (grunt) {
                     '!./bower_components/{,*/,*/css/}*min.css',
                     './app/assets/css/**/*.css'
                 ],
-                dest: 'dist/assets/css/app-min.css',
+                dest: 'dist/assets/css/app.css',
             }
         },
         uglify: {
             options: {
-                //banner: '<%%= banner %>'
+                compress: {
+                    global_defs: {
+                        "DEBUG": false
+                    },
+                    dead_code: true
+                },
+                banner: '<%= banner %>'
             },
-            js: {
+            libraries: {
                 src: 'dist/app.js',
                 dest: 'dist/app.min.js'
+            }
+        },
+        cssmin: {
+            css:{
+                src: 'dist/assets/css/app.css',
+                dest: 'dist/assets/css/app.min.css'
             }
         },
         processhtml: {
@@ -286,10 +298,10 @@ module.exports = function (grunt) {
         'concat:dist-css-first',
         'concat:dist-css-last',
         'processhtml',
-
         'concat:dist-libraries',
         'concat:dist-stylesheets',
         'uglify',
+        'cssmin',
         'clean:dist-after'
     ]);
 

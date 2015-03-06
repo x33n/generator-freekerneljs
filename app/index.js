@@ -150,6 +150,14 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             type: 'input',
             name: 'author_email',
             message: 'Author email'
+        }, {
+            type: 'input',
+            name: 'author_url',
+            message: 'Author url'
+        }, {
+            type: 'input',
+            name: 'homepage',
+            message: 'Home page'
         }];
 
         this.prompt(prompts, function (props) {
