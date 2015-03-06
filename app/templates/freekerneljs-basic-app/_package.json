@@ -7,9 +7,9 @@
   "author": {
     "name": "<%= props.author_name %>",
     "email": "<%= props.author_email %>",
-    "url": ""
+    "url": "<%= props.author_url %>"
   },
-  "homepage": "",
+  "homepage": "<%= props.homepage %>",
   "keywords": [],
   "devDependencies": {
     "grunt": "~0.4.5",
