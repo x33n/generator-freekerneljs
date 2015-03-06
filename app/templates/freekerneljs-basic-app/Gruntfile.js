@@ -150,6 +150,9 @@ module.exports = function (grunt) {
             }
         },
         concat: {
+            options: {
+                separator: ';'
+            },
             'debug-css-first': {
                 src: [
                     'app/assets/scss/temp/*.css',
@@ -165,6 +168,16 @@ module.exports = function (grunt) {
                 ],
                 dest: 'dist/debug/assets/css/app.css',
             },
+            'dist-libraries': {
+                src: [
+                    './bower_components/{,*/}*.js',
+                    './bower_components/{,*/,*/dist/}*.js',
+                    '!./bower_components/{,*/}*min.js',
+                    '!./bower_components/{,*/,*/dist/}*min.js',
+                    './app/assets/js/**/*.js'
+                ],
+                dest: 'dist/app.js',
+            },
             'dist-css-first': {
                 src: [
                     'app/assets/scss/temp/*.css',
@@ -179,17 +192,29 @@ module.exports = function (grunt) {
                     'app/assets/css/custom.css'
                 ],
                 dest: 'dist/assets/css/app.css',
+            },
+            'dist-stylesheets': {
+                src: [
+                    './bower_components/{,*/}*.css',
+                    './bower_components/{,*/,*/dist/}*.css',
+                    './bower_components/{,*/,*/css/}*.css',
+                    '!./bower_components/{,*/}*min.css',
+                    '!./bower_components/{,*/,*/dist/}*min.css',
+                    '!./bower_components/{,*/,*/css/}*min.css',
+                    './app/assets/css/**/*.css'
+                ],
+                dest: 'dist/assets/css/app-min.css',
             }
         },
-        //uglify: {
-        //    options: {
-        //        banner: '<%%= banner %>'
-        //    },
-        //    dist: {
-        //        src: '<%%= concat.dist.dest %>',
-        //        dest: 'dist/jquery.<%%= pkg.name %>.min.js'
-        //    }
-        //},
+        uglify: {
+            options: {
+                //banner: '<%%= banner %>'
+            },
+            js: {
+                src: 'dist/app.js',
+                dest: 'dist/app.min.js'
+            }
+        },
         processhtml: {
             dist: {
                 files: {
@@ -199,7 +224,7 @@ module.exports = function (grunt) {
         },
         clean: {
             'debug-before': [
-                'dist/debug/'
+                'dist/'
             ],
             'debug-after': [
                 'app/assets/scss/temp'
@@ -207,8 +232,10 @@ module.exports = function (grunt) {
             'dist-before': [
                 'dist/'
             ],
-            'disst-after': [
-                'app/assets/scss/temp'
+            'dist-after': [
+                'app/assets/scss/temp',
+                'dist/app.js',
+                'dist/assets/css/app.css'
             ]
         },
         watch: {
@@ -259,7 +286,11 @@ module.exports = function (grunt) {
         'concat:dist-css-first',
         'concat:dist-css-last',
         'processhtml',
-        'clean:debug-after'
+
+        'concat:dist-libraries',
+        'concat:dist-stylesheets',
+        'uglify',
+        'clean:dist-after'
     ]);
 
     /**
