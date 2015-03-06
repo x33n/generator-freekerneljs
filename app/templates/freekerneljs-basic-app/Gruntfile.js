@@ -11,6 +11,12 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
+        banner: '/*! <%%= pkg.name %> - v<%%= pkg.version %> - ' +
+          '<%%= grunt.template.today("yyyy-mm-dd") %>\n' +
+          '<%%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
+          '* Copyright (c) <%%= grunt.template.today("yyyy") %> <%%= pkg.author.name %>;' +
+          ' Licensed <%= props.license %> */\n',
+
         'string-replace': {
             'material-design-iconic-font': {
                 files: [{
@@ -78,6 +84,16 @@ module.exports = function (grunt) {
                 expand: true,
                 cwd: 'app',
                 dest: 'dist/debug'
+            },
+            dist: {
+                src: [
+                    '**/*',
+                    '!**/assets/css/**',
+                    '!**/assets/scss/**'
+                ],
+                expand: true,
+                cwd: 'app',
+                dest: 'dist'
             }
         },
         wiredep: {
@@ -165,6 +181,22 @@ module.exports = function (grunt) {
                 dest: 'dist/assets/css/app.css',
             }
         },
+        //uglify: {
+        //    options: {
+        //        banner: '<%%= banner %>'
+        //    },
+        //    dist: {
+        //        src: '<%%= concat.dist.dest %>',
+        //        dest: 'dist/jquery.<%%= pkg.name %>.min.js'
+        //    }
+        //},
+        processhtml: {
+            dist: {
+                files: {
+                    'dist/index.html': ['dist/index.html']
+                }
+            }
+        },
         clean: {
             'debug-before': [
                 'dist/debug/'
@@ -221,14 +253,12 @@ module.exports = function (grunt) {
 	 */
     grunt.registerTask('dist', [
         'clean:dist-before',
-        //'copy:debug',
-        //'wiredep:debug',
+        'copy:dist',
         'sass:dist',
-        //'string-replace:material-design-iconic-font',
         'string-replace:tags',
-        //'sass:material-design-iconic-font',
         'concat:dist-css-first',
         'concat:dist-css-last',
+        'processhtml',
         'clean:debug-after'
     ]);
 

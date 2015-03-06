@@ -2,23 +2,15 @@
   "name": "<%= slugname %>",
   "version": "<%= props.version %>",
   "description": "<%= props.description %>",
-  "keywords": [],
-  "homepage": "https://github.com/<%= props.github_username %>/<%= slugname %>",
-  "bugs": "<%= props.bugs %>",
+  "license": "<%= props.license %>",
+  "repository": "<%= props.github_username %>/<%= slugname %>",
   "author": {
     "name": "<%= props.author_name %>",
     "email": "<%= props.author_email %>",
     "url": "https://github.com/<%= props.github_username %>"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/<%= props.github_username %>/<%= slugname %>.git"
-  },
-  "licenses": [
-    {
-      "type": "<%= props.license %>"
-    }
-  ],
+  "homepage": "https://github.com/<%= props.github_username %>/<%= slugname %>",
+  "keywords": [],
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-clean": "^0.6.0",
