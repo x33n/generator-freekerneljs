@@ -114,7 +114,7 @@ angular.module('MainView', [])
  */
 .controller('MainViewController', function($scope, $mdSidenav, $mdToast){
     
-    $scope.appTitle = 'fkjs_(name)';
+    $scope.appTitle = 'fkjs_(title)';
     $scope.cssPrefix = 'fkjs';
     $scope.sidnavId = 'appSideNav';
         
