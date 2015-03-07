@@ -252,10 +252,10 @@ module.exports = function (grunt) {
         },
         clean: {
             'debug-before': [
-                'dist/'
+                'dist/debug'
             ],
             'debug-after': [
-                'app/assets/scss/temp'
+				
             ],
             'dist-before': [
                 'dist/'
@@ -270,7 +270,9 @@ module.exports = function (grunt) {
         watch: {
             debug: {
                 files: [
-                    'app/**/*'
+                    'app/**/*',
+					'!app/assets/scss/.sass-cache',
+					'!app/assets/scss/temp'
                 ],
                 tasks: ['debug'],
                 options: {
