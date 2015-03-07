@@ -23,6 +23,6 @@ $script.ready('appDependencies', function () {
         'app.routes.js'
 
     ], function () {
-        angular.bootstrap(document, ['<%= pkg.name %>']);
+        angular.bootstrap(document, ['<%= props.name %>']);
     });
 });

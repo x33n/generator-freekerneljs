@@ -1,4 +1,4 @@
-angular.module('<%= pkg.name %>')
+angular.module('<%= props.name %>')
 
 .config(['$routeProvider',
     function($routeProvider){

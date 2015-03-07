@@ -1,4 +1,4 @@
-angular.module('<%= pkg.name %>', [
+angular.module('<%= props.name %>', [
     // modules dependencies for 
     // the application:
     
