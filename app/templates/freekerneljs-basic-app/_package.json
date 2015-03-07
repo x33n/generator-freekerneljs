@@ -1,7 +1,8 @@
 {
   "name": "<%= slugname %>",
-  "version": "<%= props.version %>",
+  "title": "<%= props.title %>",
   "description": "<%= props.description %>",
+  "version": "<%= props.version %>",
   "license": "<%= props.license %>",
   "repository": "https://github.com/<%= props.github_username %>/<%= slugname %>",
   "author": {
