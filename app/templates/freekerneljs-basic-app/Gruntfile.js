@@ -75,6 +75,14 @@ module.exports = function (grunt) {
             }
         },
         copy: {
+            'material-design-iconic-font': {
+                src: [
+                    '**/*'
+                ],
+                expand: true,
+                cwd: 'bower_components/material-design-iconic-font/fonts',
+                dest: 'app/assets/fonts'
+            },
             debug: {
                 src: [
                     '**/*',
@@ -149,9 +157,21 @@ module.exports = function (grunt) {
                 }]
             }
         },
+        bower_concat: {
+            all: {
+                dest: "dist/_bower.js",
+                exclude: [
+                    "jquery",
+                    "modernizr"
+                ],
+                mainFiles: {
+                    'script.js': 'dist/script.js'
+                }
+            }
+        },
         concat: {
             options: {
-                separator: ';'
+                //separator: ';'
             },
             'debug-css-first': {
                 src: [
@@ -170,11 +190,7 @@ module.exports = function (grunt) {
             },
             'dist-libraries': {
                 src: [
-                    './bower_components/{,*/}*.js',
-                    './bower_components/{,*/,*/dist/}*.js',
-                    './app/assets/js/**/*.js',
-                    '!./bower_components/{,*/}*min.js',
-                    '!./bower_components/{,*/,*/dist/}*min.js'
+                    'dist/_bower.js'
                 ],
                 dest: 'dist/app.js',
             },
@@ -195,13 +211,13 @@ module.exports = function (grunt) {
             },
             'dist-stylesheets': {
                 src: [
-                    './bower_components/{,*/}*.css',
-                    './bower_components/{,*/,*/dist/}*.css',
-                    './bower_components/{,*/,*/css/}*.css',
-                    '!./bower_components/{,*/}*min.css',
-                    '!./bower_components/{,*/,*/dist/}*min.css',
-                    '!./bower_components/{,*/,*/css/}*min.css',
-                    './app/assets/css/**/*.css'
+                    'bower_components/{,*/}*.css',
+                    'bower_components/{,*/,*/dist/}*.css',
+                    'bower_components/{,*/,*/css/}*.css',
+                    'dist/assets/css/app.css',
+                    '!bower_components/{,*/}*min.css',
+                    '!bower_components/{,*/,*/dist/}*min.css',
+                    '!bower_components/{,*/,*/css/}*min.css'
                 ],
                 dest: 'dist/assets/css/app.css',
             }
@@ -247,6 +263,7 @@ module.exports = function (grunt) {
             'dist-after': [
                 'app/assets/scss/temp',
                 'dist/app.js',
+                'dist/_bower.js',
                 'dist/assets/css/app.css'
             ]
         },
@@ -298,6 +315,7 @@ module.exports = function (grunt) {
         'concat:dist-css-first',
         'concat:dist-css-last',
         'processhtml',
+        'bower_concat',
         'concat:dist-libraries',
         'concat:dist-stylesheets',
         'uglify',
@@ -311,6 +329,7 @@ module.exports = function (grunt) {
 	 * 
 	 */
     grunt.registerTask('default', [
+        'copy:material-design-iconic-font',
         'string-replace:material-design-iconic-font',
         'sass:material-design-iconic-font',
         'debug'

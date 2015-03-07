@@ -75,6 +75,14 @@ module.exports = function (grunt) {
             }
         },
         copy: {
+            'material-design-iconic-font': {
+                src: [
+                    '**/*'
+                ],
+                expand: true,
+                cwd: 'bower_components/material-design-iconic-font/fonts',
+                dest: 'app/assets/fonts'
+            },
             debug: {
                 src: [
                     '**/*',
@@ -203,13 +211,13 @@ module.exports = function (grunt) {
             },
             'dist-stylesheets': {
                 src: [
-                    './bower_components/{,*/}*.css',
-                    './bower_components/{,*/,*/dist/}*.css',
-                    './bower_components/{,*/,*/css/}*.css',
-                    '!./bower_components/{,*/}*min.css',
-                    '!./bower_components/{,*/,*/dist/}*min.css',
-                    '!./bower_components/{,*/,*/css/}*min.css',
-                    './app/assets/css/**/*.css'
+                    'bower_components/{,*/}*.css',
+                    'bower_components/{,*/,*/dist/}*.css',
+                    'bower_components/{,*/,*/css/}*.css',
+                    'dist/assets/css/app.css',
+                    '!bower_components/{,*/}*min.css',
+                    '!bower_components/{,*/,*/dist/}*min.css',
+                    '!bower_components/{,*/,*/css/}*min.css'
                 ],
                 dest: 'dist/assets/css/app.css',
             }
@@ -321,6 +329,7 @@ module.exports = function (grunt) {
 	 * 
 	 */
     grunt.registerTask('default', [
+        'copy:material-design-iconic-font',
         'string-replace:material-design-iconic-font',
         'sass:material-design-iconic-font',
         'debug'
