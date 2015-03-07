@@ -2,9 +2,14 @@
  * Load all JS dependencies, then bootstrap the application.
  */
 $script([
-    // List your files here before loading the app files, for example:
-    // 'widgets/widget1/module.js',
-    // 'views/view1/controller.js',
+    // list all your files here.
+    
+    //widgets
+    'widgets/header/module.js',
+    'widgets/navbar/module.js',
+    
+    //views
+    'views/home/controller.js',
 
     // app files
     'app.module.js'
@@ -12,12 +17,12 @@ $script([
 ], 'appDependencies');
 
 
-// Finally load routes
+// finally load routes
 $script.ready('appDependencies', function () {
     $script([
         'app.routes.js'
 
     ], function () {
-        angular.bootstrap(document, ['FreeKernelJsDemoApp']);
+        angular.bootstrap(document, ['<%= pkg.name %>']);
     });
 });

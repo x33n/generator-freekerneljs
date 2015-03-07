@@ -1,1 +1,1 @@
-freekerneljs-empty-app
+This is the basic app being used as a skeleton.

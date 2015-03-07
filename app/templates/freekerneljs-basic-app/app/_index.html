@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html ng-controller="MainViewController">
+<html>
     <head>
-        <title ng-bind="appTitle"></title>
+        <title><%= pkg.name %></title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="<%= props.description %>">
@@ -21,7 +21,10 @@
         <script src="app.bootstrap.js"></script>
     </head>
     
-    <body>
-
+    <body layout="column">
+        <section layout="row" flex>
+            <fkjs-navbar></fkjs-navbar>
+            <div layout="column" flex ng-view></div>
+        </section>
     </body>
 </html>
