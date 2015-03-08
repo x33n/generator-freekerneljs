@@ -57,6 +57,71 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
             choices: getDirectories(templatePath),
             default: 'freekerneljs-basic-app'
         }, {
+            when: function (response) {
+                if (response.template != 'freekerneljs-demo-app')
+                    return true
+
+                return false
+            },
+            type: 'checkbox',
+            name: 'modules',
+            message: 'Which modules would you like to include?',
+            choices: [{
+                value: 'angularModule',
+                name: 'angular',
+                checked: true
+            }, {
+                value: 'routeModule',
+                name: 'angular-route',
+                checked: true
+            }, {
+                value: 'ariaModule',
+                name: 'angular-aria',
+                checked: true
+            }, {
+                value: 'animateModule',
+                name: 'angular-animate',
+                checked: true
+            }, {
+                value: 'cookiesModule',
+                name: 'angular-cookies',
+                checked: false
+            }, {
+                value: 'resourceModule',
+                name: 'angular-resource',
+                checked: false
+            }, {
+                value: 'messagesModule',
+                name: 'angular-messages',
+                checked: false
+            }, {
+                value: 'sanitizeModule',
+                name: 'angular-sanitize',
+                checked: false
+            }, {
+                value: 'touchModule',
+                name: 'angular-touch',
+                checked: false
+            }, {
+                value: 'materialModule',
+                name: 'angular-material',
+                checked: true
+            }, {
+                value: 'scriptjsModule',
+                name: 'scriptjs',
+                checked: true
+            }, {
+                value: 'iconicFont',
+                name: 'material-design-iconic-font',
+                checked: false
+            }]
+        }, {
+            when: function (response) {
+                if (response.template === 'freekerneljs-demo-app')
+                    return true
+
+                return false
+            },
             type: 'checkbox',
             name: 'modules',
             message: 'Which modules would you like to include?',
@@ -192,7 +257,7 @@ var freekerneljsGenerator = yeoman.generators.Base.extend({
         this.copy(templateName + '/gitignore', '.gitignore');
         this.copy(templateName + '/travis.yml', '.travis.yml');
         this.copy(templateName + '/bowerrc', '.bowerrc');
-        this.copy(templateName + '/Gruntfile.js', 'Gruntfile.js');
+        this.copy(templateName + '../Gruntfile.js', 'Gruntfile.js');
         this.template(templateName + '/_package.json', 'package.json');
         this.template(templateName + '/_bower.json', 'bower.json');
     },

@@ -252,7 +252,7 @@ module.exports = function (grunt) {
         },
         clean: {
             'debug-before': [
-                'dist/debug'
+                'dist/debug/'
             ],
             'debug-after': [
 				
