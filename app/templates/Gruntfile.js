@@ -102,7 +102,23 @@ module.exports = function (grunt) {
                 expand: true,
                 cwd: 'app',
                 dest: 'dist'
-            }
+            },
+            'map-debug': {
+                src: [
+                    '**/*.css.map'
+                ],
+                expand: true,
+                cwd: 'app/assets/scss/temp',
+                dest: 'dist/debug/assets/css'
+            },
+            'map-dist': {
+                src: [
+                    '**/*.css.map'
+                ],
+                expand: true,
+                cwd: 'app/assets/scss/temp',
+                dest: 'dist/assets/css'
+            },
         },
         wiredep: {
             debug: {
@@ -301,6 +317,7 @@ module.exports = function (grunt) {
         'string-replace:tags',
         'concat:debug-css-first',
         'concat:debug-css-last',
+        'copy:map-debug',
         'clean:debug-after'
     ]);
 
@@ -322,6 +339,7 @@ module.exports = function (grunt) {
         'concat:dist-stylesheets',
         'uglify',
         'cssmin',
+        'copy:map-dist',
         'clean:dist-after'
     ]);
 
