@@ -110,15 +110,7 @@ module.exports = function (grunt) {
                 expand: true,
                 cwd: 'app/assets/scss/temp',
                 dest: 'dist/debug/assets/css'
-            },
-            'map-dist': {
-                src: [
-                    '**/*.css.map'
-                ],
-                expand: true,
-                cwd: 'app/assets/scss/temp',
-                dest: 'dist/assets/css'
-            },
+            }
         },
         wiredep: {
             debug: {
@@ -339,7 +331,6 @@ module.exports = function (grunt) {
         'concat:dist-stylesheets',
         'uglify',
         'cssmin',
-        'copy:map-dist',
         'clean:dist-after'
     ]);
 
