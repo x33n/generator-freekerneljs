@@ -277,8 +277,8 @@ module.exports = function (grunt) {
                 tasks: ['debug'],
                 options: {
                     // Start a live reload server on the default port 35729
-                    livereload: true,
-                    spawn: false
+                    //livereload: true,
+                    //spawn: false
                 }
             }
         }
